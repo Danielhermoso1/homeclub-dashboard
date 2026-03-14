@@ -315,7 +315,7 @@ export default function Dashboard() {
                         <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                       </div>
                       <div style={{display:"flex",alignItems:"center",gap:4}}>
-                        <Arrow value={dObn}/>
+                        <Arrow value={dObj}/>
                         <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs budget</span>
                       </div>
                     </div>
