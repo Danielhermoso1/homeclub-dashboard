@@ -400,7 +400,7 @@ export default function Dashboard() {
             borderRadius:16,padding:22}}>
             <SecHeader title="Leads & Actividad Comercial"/>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
-              <Card group="B2B" label="Facturación B2B" icon}"◎"
+              <Card group="B2B" label="Facturación B2B" icon="◎"
                 value={d.b2b.total.v26} prev={d.b2b.total.v25} obj={d.b2b.total.obj}/>
               <div style={{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.07)",
                 borderRadius:14,padding:"20px 20px 16px"}}>
