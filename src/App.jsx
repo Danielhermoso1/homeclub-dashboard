@@ -48,7 +48,7 @@ const DATA = {
       barcelona: { v26: 0.6600, v25: 0.8339, obj: 0.82 },
       valencia:  { v26: 0.9500, v25: 0.9064, obj: 0.90 },
       malaga:    { v26: 0.9000, v25: 0.8504, obj: 0.85 },
-     0ibiza:     { v26: 0.5233, v25: 0.22,   obj: 0.60 },
+     ibiza:     { v26: 0.5233, v25: 0.22,   obj: 0.60 },
       sansebas:  { v26: 0.40,   v25: null,   obj: 0.50 },
     },
     leads:    { inbound: { v26: 1663, v25: 1733 }, missed: { v26: 0.208, v25: 0.1951 } },
