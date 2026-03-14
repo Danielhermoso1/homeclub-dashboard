@@ -63,10 +63,10 @@ const YTD = [
 ];
 
 function eur(v) {
-  if (!v && v !== 0) return "—";
-  if (v >= 1000000) return `€${(v/1000000).toFixed(2)}M`;
-  if (v >= 1000)    return `€${(v/1000).toFixed(0)}K`;
-  return `€${Math.round(v)}`;
+  if (!v && v !== 0) return "â";
+  if (v >= 1000000) return `â¬${(v/1000000).toFixed(2)}M`;
+  if (v >= 1000)    return `â¬${(v/1000).toFixed(0)}K`;
+  return `â¬${Math.round(v)}`;
 }
 function pp(v) { return `${(v*100).toFixed(1)}%`; }
 function dd(a, b) {
@@ -76,7 +76,7 @@ function dd(a, b) {
 
 function Arrow({ value }) {
   if (value === null || value === undefined) {
-    return <span style={{fontSize:10,color:"rgba(255,255,255,0.2)"}}>—</span>;
+    return <span style={{fontSize:10,color:"rgba(255,255,255,0.2)"}}>â</span>;
   }
   const pos = parseFloat(value) >= 0;
   return (
@@ -86,7 +86,7 @@ function Arrow({ value }) {
       background: pos ? "rgba(52,211,153,0.15)" : "rgba(239,68,68,0.15)",
       color: pos ? "#34d399" : "#f87171",
     }}>
-      {pos ? "▲" : "▼"} {Math.abs(value)}%
+      {pos ? "â²" : "â¼"} {Math.abs(value)}%
     </span>
   );
 }
@@ -154,10 +154,10 @@ function CityTile({ city, o }) {
       <div style={{display:"flex",flexDirection:"column",gap:3}}>
         {dV25 && <span style={{fontSize:10,fontWeight:600,fontFamily:"'DM Sans',sans-serif",
           color:parseFloat(dV25)>=0?"#34d399":"#f87171"}}>
-          {parseFloat(dV25)>=0?"▲":"▼"} {Math.abs(dV25)}% vs 2025</span>}
+          {parseFloat(dV25)>=0?"â²":"â¼"} {Math.abs(dV25)}% vs 2025</span>}
         {dObj && <span style={{fontSize:10,fontWeight:600,fontFamily:"'DM Sans',sans-serif",
           color:parseFloat(dObj)>=0?"#34d399":"#f87171"}}>
-          {parseFloat(dObj)>=0?"▲":"▼"} {Math.abs(dObj)}% vs obj</span>}
+          {parseFloat(dObj)>=0?"â²":"â¼"} {Math.abs(dObj)}% vs obj</span>}
       </div>
     </div>
   );
@@ -179,7 +179,7 @@ export default function Dashboard() {
   const ocuGlobal = d.ocu.global;
   const ocuOk = ocuGlobal.v26 >= ocuGlobal.obj;
 
-  // Resumen automático del mes
+  // Resumen automÃ¡tico del mes
   const rev = d.revenue.total;
   const gap = rev.v26 - rev.obj;
   const gapPct = Math.abs(dd(rev.v26, rev.obj));
@@ -187,8 +187,8 @@ export default function Dashboard() {
   const cumpleBudget = rev.v26 >= rev.obj;
   const mes = active === "enero" ? "Enero" : "Febrero";
   const resumen = cumpleBudget
-    ? `${mes} cerró ${gapPct}% por encima de budget (+${eur(gap)}), con una facturación de ${eur(rev.v26)} — ${parseFloat(vs25)>=0 ? `+${vs25}% vs ${active==="enero"?2025:2025}` : `${vs25}% vs 2025`}.`
-    : `${mes} cerró ${gapPct}% por debajo de budget (${eur(gap)} de desviación), con una facturación de ${eur(rev.v26)} — ${parseFloat(vs25)>=0 ? `+${vs25}% vs 2025` : `${vs25}% vs 2025`}.`;
+    ? `${mes} cerrÃ³ ${gapPct}% por encima de budget (+${eur(gap)}), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs ${active==="enero"?2025:2025}` : `${vs25}% vs 2025`}.`
+    : `${mes} cerrÃ³ ${gapPct}% por debajo de budget (${eur(gap)} de desviaciÃ³n), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs 2025` : `${vs25}% vs 2025`}.`;
 
   return (
     <>
@@ -205,6 +205,7 @@ export default function Dashboard() {
           <div>
             <div style={{fontSize:10,letterSpacing:4,textTransform:"uppercase",color:GOLD,marginBottom:2,fontWeight:500}}>Homeclub</div>
             <div style={{fontSize:19,fontFamily:"'Playfair Display',serif",color:"#fff",fontWeight:600}}>Dashboard Comercial</div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif",marginTop:2}}>Owner: Elvira Madrid</div>
           </div>
           <div style={{display:"flex",gap:8}}>
             {["enero","febrero"].map(m=>(
@@ -222,23 +223,41 @@ export default function Dashboard() {
 
         <div style={{padding:"24px 36px 48px"}}>
 
-          {/* FILA 1: Facturación Total */}
+          {/* FILA 1: FacturaciÃ³n Total */}
           <div style={{marginBottom:12}}>
             <div style={{display:"flex",alignItems:"center",gap:32,
               padding:"24px 28px",background:"linear-gradient(135deg,rgba(212,175,55,0.1),rgba(212,175,55,0.03))",
               border:"1px solid rgba(212,175,55,0.3)",borderRadius:16}}>
-              <div style={{fontFamily:"'Playfair Display',serif",fontWeight:700,
-                lineHeight:1,color:cumpleBudget?"#34d399":GOLD,fontSize:"5rem",letterSpacing:"-2px"}}>
-                {eur(d.revenue.total.v26)}
-              </div>
-              <div style={{display:"flex",flexDirection:"column",gap:8}}>
-                <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",fontFamily:"'DM Sans',sans-serif",
-                  letterSpacing:2,textTransform:"uppercase"}}>Facturación Total</div>
+              {/* FacturaciÃ³n mes */}
+              <div style={{display:"flex",flexDirection:"column",gap:6}}>
+                <div style={{fontSize:10,color:"rgba(255,255,255,0.4)",fontFamily:"'DM Sans',sans-serif",
+                  letterSpacing:2,textTransform:"uppercase"}}>FacturaciÃ³n Total</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontWeight:700,
+                  lineHeight:1,color:cumpleBudget?"#34d399":GOLD,fontSize:"3.5rem",letterSpacing:"-2px"}}>
+                  {eur(d.revenue.total.v26)}
+                </div>
                 <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
                   <Arrow value={dd(d.revenue.total.v26, d.revenue.total.v25)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                   <Arrow value={dd(d.revenue.total.v26, d.revenue.total.obj)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs budget ({eur(d.revenue.total.obj)})</span>
+                </div>
+              </div>
+              {/* Separador */}
+              <div style={{width:"1px",height:"80px",background:"rgba(212,175,55,0.2)"}}/>
+              {/* YTD acumulado */}
+              <div style={{display:"flex",flexDirection:"column",gap:6}}>
+                <div style={{fontSize:10,color:"rgba(255,255,255,0.4)",fontFamily:"'DM Sans',sans-serif",
+                  letterSpacing:2,textTransform:"uppercase"}}>Acumulado YTD</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontWeight:700,
+                  lineHeight:1,color:ytdV26>=ytdObj?"#34d399":GOLD,fontSize:"3.5rem",letterSpacing:"-2px"}}>
+                  {eur(ytdV26)}
+                </div>
+                <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
+                  <Arrow value={dd(ytdV26,ytdObj)}/>
+                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs budget ({eur(ytdObj)})</span>
+                  <Arrow value={dd(ytdV26,ytdV25)}/>
+                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                 </div>
               </div>
             </div>
@@ -248,7 +267,7 @@ export default function Dashboard() {
               borderRadius:10}}>
               <span style={{fontSize:13,color:cumpleBudget?"#34d399":"#f87171",
                 fontFamily:"'DM Sans',sans-serif",fontWeight:500}}>
-                {cumpleBudget?"✓":"✗"}
+                {cumpleBudget?"â":"â"}
               </span>
               <span style={{fontSize:13,color:"rgba(255,255,255,0.6)",
                 fontFamily:"'DM Sans',sans-serif",marginLeft:8}}>{resumen}</span>
@@ -257,26 +276,26 @@ export default function Dashboard() {
 
           {/* FILA 2: Desglose revenue */}
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:20}}>
-            <Card group="Revenue" label="Madrid Corpo" icon="◆"
+            <Card group="Revenue" label="Madrid Corpo" icon="â"
               value={d.revenue.madCorpo.v26} prev={d.revenue.madCorpo.v25} obj={d.revenue.madCorpo.obj}/>
-            <Card group="Revenue" label="Madrid Días" icon="◇"
+            <Card group="Revenue" label="Madrid DÃ­as" icon="â"
               value={madDV26} prev={madDV25||null} obj={madDObj}/>
-            <Card group="Revenue" label="Destinos" icon="◈"
+            <Card group="Revenue" label="Destinos" icon="â"
               value={destV26} prev={destV25||null} obj={destObj}/>
           </div>
 
-          {/* FACTURACIÓN POR DESTINO */}
+          {/* FACTURACIÃN POR DESTINO */}
           <div style={{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.07)",
             borderRadius:16,padding:22,marginBottom:16}}>
-            <SecHeader title="Facturación por Destino"/>
+            <SecHeader title="FacturaciÃ³n por Destino"/>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
               {[
                 {label:"Mad Corpo", v:d.revenue.madCorpo},
-                {label:"Mad Días",  v:d.revenue.madDias},
+                {label:"Mad DÃ­as",  v:d.revenue.madDias},
                 {label:"Mad Tur",   v:d.revenue.madTur},
                 {label:"Barcelona", v:d.revenue.barcelona},
                 {label:"Valencia",  v:d.revenue.valencia},
-                {label:"Málaga",    v:d.revenue.malaga},
+                {label:"MÃ¡laga",    v:d.revenue.malaga},
                 {label:"S. Sebas",  v:d.revenue.sansebas},
                 {label:"Ibiza",     v:d.revenue.ibiza},
                 {label:"Lisboa",    v:d.revenue.lisboa},
@@ -296,7 +315,7 @@ export default function Dashboard() {
                         <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                       </div>
                       <div style={{display:"flex",alignItems:"center",gap:4}}>
-                        <Arrow value={dObj}/>
+                        <Arrow value={dObn}/>
                         <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs budget</span>
                       </div>
                     </div>
@@ -309,7 +328,7 @@ export default function Dashboard() {
           {/* YTD */}
           <div style={{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.07)",
             borderRadius:16,padding:22,marginBottom:16}}>
-            <SecHeader title="Evolución Facturación YTD"/>
+            <SecHeader title="EvoluciÃ³n FacturaciÃ³n YTD"/>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr",gap:8,marginBottom:8}}>
               {["Mes","2026","Budget","vs Budget","vs 2025"].map(h=>(
                 <div key={h} style={{fontSize:10,letterSpacing:"1.5px",textTransform:"uppercase",
@@ -337,10 +356,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* OCUPACIÓN */}
+          {/* OCUPACIÃN */}
           <div style={{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.07)",
             borderRadius:16,padding:22,marginBottom:16}}>
-            <SecHeader title="Ocupación por Ciudad"/>
+            <SecHeader title="OcupaciÃ³n por Ciudad"/>
             {/* Global grande */}
             <div style={{display:"flex",alignItems:"center",gap:32,marginBottom:24,
               padding:"20px 28px",background:"rgba(212,175,55,0.06)",
@@ -356,7 +375,7 @@ export default function Dashboard() {
               </div>
               <div style={{display:"flex",flexDirection:"column",gap:8}}>
                 <div style={{fontSize:11,color:"rgba(255,255,255,0.4)",fontFamily:"'DM Sans',sans-serif",
-                  letterSpacing:2,textTransform:"uppercase"}}>Ocupación Global</div>
+                  letterSpacing:2,textTransform:"uppercase"}}>OcupaciÃ³n Global</div>
                 <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
                   <Arrow value={dd(ocuGlobal.v26,ocuGlobal.v25)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
@@ -370,9 +389,9 @@ export default function Dashboard() {
               <CityTile city="Madrid"        o={d.ocu.madrid}/>
               <CityTile city="Barcelona"     o={d.ocu.barcelona}/>
               <CityTile city="Valencia"      o={d.ocu.valencia}/>
-              <CityTile city="Málaga"        o={d.ocu.malaga}/>
+              <CityTile city="MÃ¡laga"        o={d.ocu.malaga}/>
               <CityTile city="Ibiza"         o={d.ocu.ibiza}/>
-              <CityTile city="San Sebastián" o={d.ocu.sansebas}/>
+              <CityTile city="San SebastiÃ¡n" o={d.ocu.sansebas}/>
             </div>
           </div>
 
@@ -381,7 +400,7 @@ export default function Dashboard() {
             borderRadius:16,padding:22}}>
             <SecHeader title="Leads & Actividad Comercial"/>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14}}>
-              <Card group="B2B" label="Facturación B2B" icon="◎"
+              <Card group="B2B" label="FacturaciÃ³n B2B" icon="â"
                 value={d.b2b.total.v26} prev={d.b2b.total.v25} obj={d.b2b.total.obj}/>
               <div style={{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.07)",
                 borderRadius:14,padding:"20px 20px 16px"}}>
@@ -404,7 +423,7 @@ export default function Dashboard() {
           <div style={{marginTop:28,paddingTop:18,borderTop:"1px solid rgba(255,255,255,0.05)",
             display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <div style={{fontSize:10,color:"rgba(255,255,255,0.15)",letterSpacing:1}}>
-              HOMECLUB · Dashboard Comercial · Fuente: reportes mensuales + cartera de propiedades
+              HOMECLUB Â· Dashboard Comercial Â· Fuente: reportes mensuales + cartera de propiedades
             </div>
             <div style={{fontSize:10,color:"rgba(255,255,255,0.15)"}}>
               {new Date().toLocaleDateString("es-ES",{day:"2-digit",month:"long",year:"numeric"})}
