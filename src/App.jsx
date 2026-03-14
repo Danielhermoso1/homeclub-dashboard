@@ -118,7 +118,7 @@ function Card({ label, group, value, prev, obj, type, highlight, icon }) {
         </div>
         <div style={{display:"flex",alignItems:"center",gap:6}}>
           <Arrow value={dd(value,obj)}/>
-          <span style={{fontSize:10,color:"rgba(255,255,255,0.25)",fontFamily:"'DM Sans',sans-serif"}}>vs budget</span>
+          <span style={{fontSize:10,color:"rgba(255,255,255,0.25)",fontFamily:"'DM Sans',sans-serif"}}>vs objetivo</span>
         </div>
       </div>
     </div>
@@ -187,8 +187,8 @@ export default function Dashboard() {
   const cumpleBudget = rev.v26 >= rev.obj;
   const mes = active === "enero" ? "Enero" : "Febrero";
   const resumen = cumpleBudget
-    ? `${mes} cerrÃ³ ${gapPct}% por encima de budget (+${eur(gap)}), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs ${active==="enero"?2025:2025}` : `${vs25}% vs 2025`}.`
-    : `${mes} cerrÃ³ ${gapPct}% por debajo de budget (${eur(gap)} de desviaciÃ³n), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs 2025` : `${vs25}% vs 2025`}.`;
+    ? `${mes} cerrÃ³ ${gapPct}% por encima de objetivo (+${eur(gap)}), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs ${active==="enero"?2025:2025}` : `${vs25}% vs 2025`}.`
+    : `${mes} cerrÃ³ ${gapPct}% por debajo de objetivo (${eur(gap)} de desviaciÃ³n), con una facturaciÃ³n de ${eur(rev.v26)} â ${parseFloat(vs25)>=0 ? `+${vs25}% vs 2025` : `${vs25}% vs 2025`}.`;
 
   return (
     <>
@@ -240,7 +240,7 @@ export default function Dashboard() {
                   <Arrow value={dd(d.revenue.total.v26, d.revenue.total.v25)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                   <Arrow value={dd(d.revenue.total.v26, d.revenue.total.obj)}/>
-                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs budget ({eur(d.revenue.total.obj)})</span>
+                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs objetivo ({eur(d.revenue.total.obj)})</span>
                 </div>
               </div>
               {/* Separador */}
@@ -255,7 +255,7 @@ export default function Dashboard() {
                 </div>
                 <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
                   <Arrow value={dd(ytdV26,ytdObj)}/>
-                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs budget ({eur(ytdObj)})</span>
+                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs objetivo ({eur(ytdObj)})</span>
                   <Arrow value={dd(ytdV26,ytdV25)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                 </div>
@@ -316,7 +316,7 @@ export default function Dashboard() {
                       </div>
                       <div style={{display:"flex",alignItems:"center",gap:4}}>
                         <Arrow value={dObj}/>
-                        <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs budget</span>
+                        <span style={{fontSize:9,color:"rgba(255,255,255,0.2)",fontFamily:"'DM Sans',sans-serif"}}>vs objetivo</span>
                       </div>
                     </div>
                   </div>
@@ -330,7 +330,7 @@ export default function Dashboard() {
             borderRadius:16,padding:22,marginBottom:16}}>
             <SecHeader title="EvoluciÃ³n FacturaciÃ³n YTD"/>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr",gap:8,marginBottom:8}}>
-              {["Mes","2026","Budget","vs Budget","vs 2025"].map(h=>(
+              {["Mes","2026","Objetivo","vs Objetivo","vs 2025"].map(h=>(
                 <div key={h} style={{fontSize:10,letterSpacing:"1.5px",textTransform:"uppercase",
                   color:"rgba(255,255,255,0.25)",fontFamily:"'DM Sans',sans-serif",
                   textAlign:h==="Mes"?"left":"right"}}>{h}</div>
@@ -380,7 +380,7 @@ export default function Dashboard() {
                   <Arrow value={dd(ocuGlobal.v26,ocuGlobal.v25)}/>
                   <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs 2025</span>
                   <Arrow value={dd(ocuGlobal.v26,ocuGlobal.obj)}/>
-                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs budget ({pp(ocuGlobal.obj)})</span>
+                  <span style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontFamily:"'DM Sans',sans-serif"}}>vs objetivo ({pp(ocuGlobal.obj)})</span>
                 </div>
               </div>
             </div>
